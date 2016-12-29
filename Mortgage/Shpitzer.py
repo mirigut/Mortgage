@@ -1,13 +1,12 @@
 import numpy
+import math
 
-nper = 20
+nper = 5
 rate = 0.04
-pv = 300000
-inflation = 0.02
+pv = 500000
+inflation = 0.025
 
 first_payment = -numpy.pmt(rate / 12, nper * 12, pv)
-
-print first_payment
 
 balance = [0]
 rate_return = [0]
@@ -37,6 +36,16 @@ for i in xrange(2,nper * 12 + 1):
 		final_balance.append((balance[i]-fund_return[i])*(inflation/12+1))
 
 for i in xrange(1,nper * 12 + 1):
-	print i,balance[i],rate_return[i],fund_return[i]
+	if (i % 15 == 0):
+		print "Month ; Balance ; Rate return ; Func return ; Total Return"
+	print i,";",balance[i],";",rate_return[i],";",fund_return[i],";",total_return[i]
 
+print ""
+print ""
+paid_money = sum(total_return)
+print "Loan sum:               ",pv
+print "Total paid:             ",paid_money
+print "First monthly payment:  ", min(total_return[1:])
+print "Max monthly payment:    ", max(total_return)
+print "Average monthly payment:", numpy.mean(total_return)
 
