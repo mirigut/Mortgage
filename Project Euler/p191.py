@@ -24,7 +24,10 @@ def checkIfGoodReport(report):
 def checkDays(level,maxLevel,report,late_ocasions,consec_absent):
 	if level == maxLevel:
 		if checkIfGoodReport(report):
-			print report
+			s = ""
+			for r in report:
+				s = s + r
+			print s
 			return 1
 
 		else:
@@ -40,4 +43,4 @@ def checkDays(level,maxLevel,report,late_ocasions,consec_absent):
 
 	return s
 
-print checkDays(0,5,[],0,0)
+print checkDays(0,6,[],0,0)

@@ -1,4 +1,4 @@
-# Problem 91 explained
+# Problem 191 explained
 
 Let's assume we have 'n' days, we want to find a formula for the function:
 

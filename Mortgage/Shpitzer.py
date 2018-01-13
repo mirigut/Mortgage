@@ -1,5 +1,6 @@
 import numpy
 import math
+import argparse
 
 def build_table(months,rate,pv,inflation):
 	balance = [0]
@@ -38,16 +39,33 @@ def build_table(months,rate,pv,inflation):
 	print "Loan period in months:  ",months, "(" , months/12.0,"years )"
 	print "Loan sum:               ",pv
 	print "Total paid:             ",paid_money
+	print "Interest :( :           ",paid_money - pv
 	print "First monthly payment:  ", min(total_return[1:])
 	print "Max monthly payment:    ", max(total_return)
 	print "Average monthly payment:", numpy.mean(total_return)
 
+def calculate_rate(pv, hon):
+	if (float(hon)/float(pv + hon) > 55.0/100.0):
+		print 0.036
+		return 0.036
+	elif (float(hon) / float(pv + hon) > 40.0 / 100.0):
+		print 0.046
+		return 0.046
+	elif (float(hon) / float(pv + hon) > 25.0 / 100.0):
+		print 0.056
+		return 0.056
+	else:
+		return 100
 
-nper = 30
-rate = 0.036
-pv = 440000
-inflation = 0.025
-wanted_pmt = 10000
+
+
+nper = 20
+total = 3500000
+hon = 	1500000
+pv = total - hon
+rate = calculate_rate(pv, hon)
+inflation = 0.0
+wanted_pmt = 12000
 
 first_payment = -numpy.pmt(rate / 12, nper * 12, pv)
 
